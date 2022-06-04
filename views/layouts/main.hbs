@@ -3,10 +3,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Add Materialize-->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
+    <!--Add font awesome-->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -18,12 +20,20 @@
     <title>TicketApp</title>
   </head>
   <body>
+
+    {{>_header}}
     <div class="container">
       {{{body}}}
     </div>
 
+    <!--Add Materialize-->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
     ></script>
+
+    <!--Initialize Materialize sidebar-->
+    <script>
+      M.Sidenav.init(document.querySelector('.sidenav'))
+    </script>
   </body>
 </html>
