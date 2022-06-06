@@ -7,6 +7,7 @@ module.exports = {
       res.redirect("/");
     }
   },
+  
   // if user is logedIn => send to dashboard
   ensureGuest: function (req, res, next) {
     if (req.isAuthenticated()) {

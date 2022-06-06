@@ -1,0 +1,28 @@
+<h1>All Tickets</h1>
+<div class="row">
+  {{#each tickets}}
+    <div class="col s12 m4">
+      <div class="card">
+        <div class="card-image">
+          {{{editIcon author._id ../user _id}}}
+        </div>
+        <div class="card-content center-align">
+          <h5>{{title}}</h5>
+          <p>{{stripTags (truncate body 100)}}</p>
+          <br />
+
+          <div class="chip">
+            <img src="{{author.image}}" alt="" />
+            <a href="/tickets/author/{{author._id}}">{{author.displayName}}</a>
+          </div>
+        </div>
+
+        <div class="card-action center-align">
+          <a href="/tickets/{{_id}}" class="btn grey">Show</a>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <h6>No Tickets Yet</h6>
+  {{/each}}
+</div>

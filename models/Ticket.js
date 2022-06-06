@@ -19,10 +19,6 @@ const TicketSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    image: {
-        type: String,
-        required: false
-    },
     createdAt: {
         type: Date,
         default: Date.now
