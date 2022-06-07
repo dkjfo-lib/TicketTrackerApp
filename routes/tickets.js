@@ -89,7 +89,7 @@ router.put("/:id", ensureAuth, async (req, res) => {
       { _id: req.params.id },
       updateTicket,
       { new: true, runValidators: true }
-    )
+    );
   }
 
   res.redirect("/tickets");
@@ -99,8 +99,46 @@ router.put("/:id", ensureAuth, async (req, res) => {
 // @route   DELETE /tickets/:id
 router.delete("/:id", ensureAuth, async (req, res) => {
   try {
-    await Ticket.remove({_id: req.params.id})
-    res.redirect('/dashboard')
+    await Ticket.remove({ _id: req.params.id });
+    res.redirect("/dashboard");
+  } catch (error) {
+    console.error(error);
+    res.render("error/500");
+  }
+});
+
+// @desc    Show ticket page
+// @route   GET /tickets/:id
+router.get("/:id", ensureAuth, async (req, res) => {
+  try {
+    let ticket = await Ticket.findById(req.params.id).populate("author").lean();
+
+    if (!ticket) {
+      return res.render("error/404");
+    }
+
+    res.render("tickets/display", {
+      ticket,
+      user: req.user,
+    });
+  } catch (error) {
+    console.error(error);
+    res.render("error/500");
+  }
+});
+
+// @desc    Show user tickets
+// @route   GET /tickets/author/:id
+router.get("/author/:id", ensureAuth, async (req, res) => {
+  try {
+    let tickets = await Ticket.find({ author: req.params.id })
+      .populate("author")
+      .lean();
+
+    res.render("tickets/index", {
+      tickets,
+      user: req.user,
+    });
   } catch (error) {
     console.error(error);
     res.render("error/500");
